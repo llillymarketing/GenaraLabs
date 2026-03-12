@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Mail } from 'lucide-react';
-import Logo from './Logo';
 
 export default function Footer() {
   return (
@@ -10,41 +9,31 @@ export default function Footer() {
       <div className="bg-[#0d1830] border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <p className="text-xs text-white/50 text-center leading-relaxed">
-            <span className="text-white/70 font-medium">DISCLAIMER:</span> All products sold by Genara Labs are intended strictly for laboratory and research purposes only and are not intended for human consumption. These products have not been evaluated or approved by the FDA. Not a dietary supplement. By purchasing, you confirm research-use only.
+            <span className="text-white/70 font-medium">DISCLAIMER:</span> All products sold by Genara Labs are intended strictly for laboratory and research purposes only and are not intended for human consumption. These products have not been evaluated or approved by the FDA. Not a dietary supplement.
           </p>
         </div>
       </div>
-
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div className="lg:col-span-1">
-            <img
-              src="https://media.base44.com/images/public/69b1b9537ee76e31a86fda3a/c7cc28f45_GenaraLabsbackground.png"
-              alt="Genara Labs"
-              className="h-14 w-auto"
-              style={{ mixBlendMode: 'screen' }}
-            />
-            <p className="mt-4 text-sm text-white/50 leading-relaxed">
-              Laboratory-grade research peptides with verified purity and comprehensive certificates of analysis.
-            </p>
-            <div className="mt-6 space-y-2.5">
+            <img src="https://media.base44.com/images/public/69b1b9537ee76e31a86fda3a/c7cc28f45_GenaraLabsbackground.png" alt="Genara Labs" className="h-14 w-auto" style={{ mixBlendMode: 'screen' }} />
+            <p className="mt-4 text-sm text-white/50 leading-relaxed">Laboratory-grade research peptides with verified purity and comprehensive certificates of analysis.</p>
+            <div className="mt-6">
               <a href="mailto:support@genaralabs.com" className="flex items-center gap-2 text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">
                 <Mail className="w-4 h-4" />support@genaralabs.com
               </a>
             </div>
           </div>
-
           <div>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Products</h4>
             <ul className="space-y-2.5">
               <li><Link to={createPageUrl('Products')} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">All Peptides</Link></li>
-              <li><Link to={createPageUrl('Products') + '?category=growth_factors'} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">Growth Factors</Link></li>
-              <li><Link to={createPageUrl('Products') + '?category=metabolic'} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">Metabolic</Link></li>
-              <li><Link to={createPageUrl('Products') + '?category=recovery'} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">Recovery</Link></li>
-              <li><Link to={createPageUrl('Products') + '?category=cognitive'} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">Cognitive</Link></li>
+              <li><Link to={createPageUrl('Products')} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">Growth Factors</Link></li>
+              <li><Link to={createPageUrl('Products')} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">Metabolic</Link></li>
+              <li><Link to={createPageUrl('Products')} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">Recovery</Link></li>
+              <li><Link to={createPageUrl('Products')} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">Cognitive</Link></li>
             </ul>
           </div>
-
           <div>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h4>
             <ul className="space-y-2.5">
@@ -53,7 +42,6 @@ export default function Footer() {
               <li><Link to={createPageUrl('Products')} className="text-sm text-white/50 hover:text-[#4fc3f7] transition-colors">Shop</Link></li>
             </ul>
           </div>
-
           <div>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Legal</h4>
             <ul className="space-y-2.5">
@@ -65,7 +53,6 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-
         <div className="mt-16 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-white/30">© {new Date().getFullYear()} Genara Labs. All rights reserved.</p>
