@@ -1,7 +1,3 @@
-/**
- * Creates a URL path for a given page name.
- * Maps Base44-style page names to URL-friendly paths.
- */
 export function createPageUrl(pageName) {
   const pageMap = {
     Home: '/',
