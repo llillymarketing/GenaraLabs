@@ -6,7 +6,9 @@ function getCart() {
   try {
     const data = localStorage.getItem(CART_KEY);
     return data ? JSON.parse(data) : [];
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 function saveCart(items) {
@@ -30,8 +32,18 @@ export function useCart() {
   const addItem = useCallback((product, qty = 1) => {
     const cart = getCart();
     const existing = cart.find(i => i.product_id === product.id);
-    if (existing) { existing.quantity += qty; }
-    else { cart.push({ product_id: product.id, product_name: product.name, price: product.price, milligrams: product.milligrams, image_url: product.image_url, quantity: qty }); }
+    if (existing) {
+      existing.quantity += qty;
+    } else {
+      cart.push({
+        product_id: product.id,
+        product_name: product.name,
+        price: product.price,
+        milligrams: product.milligrams,
+        image_url: product.image_url,
+        quantity: qty,
+      });
+    }
     saveCart(cart);
     setItems(cart);
   }, []);
@@ -45,10 +57,17 @@ export function useCart() {
   const updateQuantity = useCallback((productId, qty) => {
     const cart = getCart();
     const item = cart.find(i => i.product_id === productId);
-    if (item) { item.quantity = Math.max(1, qty); saveCart(cart); setItems(cart); }
+    if (item) {
+      item.quantity = Math.max(1, qty);
+      saveCart(cart);
+      setItems(cart);
+    }
   }, []);
 
-  const clearCart = useCallback(() => { saveCart([]); setItems([]); }, []);
+  const clearCart = useCallback(() => {
+    saveCart([]);
+    setItems([]);
+  }, []);
 
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const count = items.reduce((sum, i) => sum + i.quantity, 0);
