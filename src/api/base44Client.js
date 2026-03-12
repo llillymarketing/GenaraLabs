@@ -1,38 +1,53 @@
 // Standalone shim — replaces Base44 platform SDK for Vercel/standalone builds
-// Auth, entity reads, and integrations are stubbed to prevent build errors.
 
-const noopAsync = async () => null;
+const noop = async () => null;
+const noopList = async () => [];
 
-const entityProxy = () => ({
-  list: async () => [],
-  filter: async () => [],
-  get: noopAsync,
-  create: noopAsync,
-  update: noopAsync,
-  delete: noopAsync,
+function makeEntity() {
+  return {
+    list: noopList,
+    filter: noopList,
+    get: noop,
+    create: noop,
+    update: noop,
+    delete: noop,
+    schema: async () => ({}),
+  };
+}
+
+// Pre-define all entities used in this app
+const entities = {
+  Product: makeEntity(),
+  Order: makeEntity(),
+  User: makeEntity(),
+};
+
+// Proxy so any entity name works without crashing
+const entitiesProxy = new Proxy(entities, {
+  get(target, prop) {
+    if (prop in target) return target[prop];
+    return makeEntity();
+  },
 });
 
 export const base44 = {
   auth: {
-    me: noopAsync,
+    me: noop,
     isAuthenticated: async () => false,
-    logout: (url) => { if (url) window.location.href = url; else window.location.reload(); },
-    redirectToLogin: (next) => { console.warn('Auth not configured for standalone build.'); },
-    updateMe: noopAsync,
+    logout: (url) => { window.location.href = url || '/'; },
+    redirectToLogin: () => {},
+    updateMe: noop,
   },
-  entities: new Proxy({}, {
-    get: (_, name) => entityProxy(name),
-  }),
+  entities: entitiesProxy,
   integrations: {
     Core: {
-      InvokeLLM: noopAsync,
-      SendEmail: noopAsync,
-      UploadFile: noopAsync,
-      GenerateImage: noopAsync,
-      ExtractDataFromUploadedFile: noopAsync,
+      InvokeLLM: noop,
+      SendEmail: noop,
+      UploadFile: noop,
+      GenerateImage: noop,
+      ExtractDataFromUploadedFile: noop,
     },
   },
-  functions: {
-    invoke: noopAsync,
-  },
+  functions: { invoke: noop },
+  analytics: { track: () => {} },
 };
