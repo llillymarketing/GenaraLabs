@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
-
 import Layout from './Layout';
 import Home from './pages/Home';
 import Products from './pages/Products';
